@@ -49,7 +49,7 @@ static int parseLoc(char const* str, loc &res) {
 			pos += tmp;
 			break;
 		default: 
-			puts("Bad location");
+			printf("Bad location [%c]\n", str[pos-1]);
 			return -1;
 	}
 	return pos;

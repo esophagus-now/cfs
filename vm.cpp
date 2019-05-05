@@ -21,6 +21,8 @@ ostream& operator<< (ostream &o, loc const& l) {
 			return o << "(register " << l.reg.r << ")";
 		case MEM:
 			return o << "(memory at " << l.mem.addr << ")";
+		case REGIND:
+			return o << "(memory at indexed by r" << l.regind.r << ")";
 		case IMM:
 			return o << "(immediate value " << l.imm.val << ")";
 		default:

@@ -18,7 +18,7 @@ ostream& operator<< (ostream &o, vector<T> const& v) {
 }
 
 int main() {
-	char const* prog1 = 
+	char const* fib = 
 		"cr3v20" //Loop count
 		"cr2v2"  //r2 is the address we are currently processing
 		"cr1v1"  //r1 and r0 are the initial two Fibonacci numbers
@@ -35,7 +35,7 @@ int main() {
 		"cr1r5"
 		"ju-8" //Restart main loop
 		;
-	char const* prog2 = 
+	char const* lucas = 
 		"cr3v20" //Loop count
 		"cr2v52"  //r2 is the address we are currently processing
 		"cr1v1"  //r1 and r0 are the initial two Lucas numbers
@@ -52,14 +52,31 @@ int main() {
 		"cr1r5"
 		"ju-8" //Restart main loop
 		;
+	char const* cnt = 
+		"cr3v20" //Loop count
+		"cr2v100" //Start address
+		"cr1v1" //First number
+		//Main loop:
+		"b-r3r3v1" //Decrement r3
+		"jn 20" //Quit if loop is finished
+		"ci2r1" //mem[r2] = r1
+		"b+r1r1v1" //Increment r1
+		"b+r2r2v1" //Increment r2
+		"ju-6" //Restart main loop
+		;
+		
 	
-	vector<instr> parsed1 = parseProg(prog1);
-	vector<instr> parsed2 = parseProg(prog2);
+	vector<instr> parsed1 = parseProg(fib);
+	vector<instr> parsed2 = parseProg(lucas);
+	vector<instr> parsed3 = parseProg(cnt);
 	cout << "Fibonacci program: " << parsed1 << endl;
-	cout << "Kucas program: " << parsed2 << endl;
+	cout << "Lucas program: " << parsed2 << endl;
+	cout << "Iota program: " << parsed3 << endl;
 	vm init;
 	runProg(parsed1, init);
 	cout << init;
 	runProg(parsed2, init);
+	cout << init;
+	runProg(parsed3, init);
 	cout << init;
 }
